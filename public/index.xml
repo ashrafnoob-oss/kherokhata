@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>খেরোখাতা</title>
+    <link>http://localhost:1313/kherokhata/</link>
+    <description>Recent content on খেরোখাতা</description>
+    <generator>Hugo</generator>
+    <language>bn</language>
+    <lastBuildDate>Mon, 07 Sep 2026 14:51:21 +0600</lastBuildDate>
+    <atom:link href="http://localhost:1313/kherokhata/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>First Post</title>
+      <link>http://localhost:1313/kherokhata/posts/first-post/</link>
+      <pubDate>Mon, 07 Sep 2026 14:51:21 +0600</pubDate>
+      <guid>http://localhost:1313/kherokhata/posts/first-post/</guid>
+      <description>&lt;p&gt;আমার দৈনন্দিনের পোস্ট, স্টোরি আর হবে না দেখা,
+আর হবে না কখনো কথাবার্তা বলা,
+নেওয়া হবে না কোনো খোঁজখবর আর—
+সব যোগাযোগ থেমে যাবে এক নিমেষে, নিঃশেষে।&lt;/p&gt;
+&lt;p&gt;পুরো কবিতায় বসালে এমন দাঁড়ায়:&lt;/p&gt;
+&lt;p&gt;যাওয়ার আগে একটাই ইচ্ছে মনে,
+নিঃশব্দে সরে যাওয়াই হোক শেষ কথা, নীরবে।&lt;/p&gt;
+&lt;p&gt;পেছনে ফিরে তাকাব না,
+ফিরে তাকালেই মায়া জমে,
+আর মায়া জমলেই ফেরার ইচ্ছেটা জেগে ওঠে।&lt;/p&gt;
+&lt;p&gt;যে রাস্তায় হাঁটতাম রোজ,
+সেই রাস্তা মনে রাখবে আমার পায়ের ছাপ,
+আমি রাখব না কিছুই, কোনো ঠিকানা, কোনো চিহ্ন।&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
