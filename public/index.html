@@ -146,6 +146,8 @@
   .theme-dot[data-theme-btn="dark"] { background: #1B1815; }
 
   .layout { display: grid; grid-template-columns: 280px 1fr; gap: 36px; max-width: 1200px; width: 100%; margin: 0 auto; padding: 36px 32px 60px; min-width: 0; }
+  .layout.no-sidebar { grid-template-columns: 1fr; }
+  .layout.no-sidebar .sidebar { display: none; }
   .sidebar, .content-pane { min-width: 0; }
   .sidebar h2 { font-family: 'Hind Siliguri', sans-serif; font-size: 14px; font-weight: 600; color: var(--accent-2); margin: 0 0 14px 4px; }
   .title-list { display: flex; flex-direction: column; gap: 10px; }
@@ -234,8 +236,8 @@
   <button id="soundToggle" class="ui"></button>
 </header>
 
-<div class="layout">
-  <aside class="sidebar">
+<div class="layout" id="mainLayout">
+  <aside class="sidebar" id="sidebarEl">
     <h2>লেখাসমূহ</h2>
     <div class="title-list" id="titleList"></div>
   </aside>
@@ -467,6 +469,7 @@ function selectWriting(id) {
   document.querySelectorAll('.title-card').forEach(el => el.classList.toggle('active', el.dataset.id === id));
   document.getElementById('navAbout').classList.remove('active');
   document.getElementById('navHome').classList.add('active');
+  document.getElementById('mainLayout').classList.remove('no-sidebar');
   const pane = document.getElementById('contentPane');
   pane.classList.add('switching');
   setTimeout(() => { renderContent(); pane.classList.remove('switching'); }, 180);
@@ -478,11 +481,11 @@ function renderAbout() {
   document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
   document.getElementById('navHome').classList.remove('active');
   document.getElementById('navAbout').classList.add('active');
+  document.getElementById('mainLayout').classList.add('no-sidebar');
   const pane = document.getElementById('contentPane');
   pane.classList.add('switching');
   setTimeout(() => {
     pane.innerHTML = `
-      <div class="breadcrumb"><b>আমার সম্পর্কে</b></div>
       <h2>আমার সম্পর্কে......</h2>
       <div class="writing-body">
         <p>আমি এখানে লিখি, কারণ কিছু কথা মুখে বলা যায় না।</p>
