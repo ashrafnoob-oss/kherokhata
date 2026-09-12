@@ -185,6 +185,18 @@
   .action-btn svg { width: 17px; height: 17px; }
 
   .tagline-box { font-family: 'Noto Serif Bengali', serif; font-style: italic; font-size: 16px; color: var(--accent-dark); background: var(--accent-soft); border-left: 3px solid var(--accent-2); border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; }
+
+  .all-list { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+  .all-item {
+    display: flex; flex-direction: column; gap: 6px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 18px 20px; cursor: pointer;
+    box-shadow: 0 1px 0 var(--shadow-1) inset, 0 2px 4px var(--shadow-2);
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  .all-item:hover { transform: translateY(-2px); box-shadow: 0 1px 0 var(--shadow-1) inset, 0 4px 10px var(--shadow-4); }
+  .all-item h4 { font-family: 'Noto Serif Bengali', serif; font-size: 20px; color: var(--accent); margin: 0; }
+  .all-item .all-date { font-family: 'Hind Siliguri', sans-serif; font-size: 12px; color: var(--text-muted); }
+  .all-item .all-tagline { font-family: 'Noto Serif Bengali', serif; font-style: italic; font-size: 14px; color: var(--text-muted); margin-top: 2px; }
   .copy-toast {
     position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(20px);
     background: var(--text); color: var(--on-text); font-family: 'Hind Siliguri', sans-serif; font-size: 14px;
@@ -222,9 +234,8 @@
   </div>
   <nav class="site-nav">
     <a href="#" id="navHome" class="active">হোম</a>
-    <a href="#">সব লেখা</a>
     <a href="#" id="navAbout">আমার সম্পর্কে</a>
-    <a href="#contact">যোগাযোগ</a>
+    <a href="#" id="navContact">যোগাযোগ</a>
   </nav>
   <div class="theme-dots" id="themeDots" role="group" aria-label="থিম বাছাই">
     <button class="theme-dot" data-theme-btn="cream" title="Cream" aria-label="Cream থিম"></button>
@@ -349,30 +360,6 @@
   
 </div>
 
-<footer class="contact" id="contact">
-  <div class="contact-wrap">
-    <h3>যোগাযোগ</h3>
-    <div class="contact-grid">
-      <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-12.9 7.3L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5Z"/></svg>
-      <div class="label"><b>WhatsApp</b><span>(লিংক যুক্ত হবে)</span></div>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14 9h-2c-1 0-1.5.5-1.5 1.5V12h3.3l-.4 3H10.5v6"/></svg>
-      <div class="label"><b>Facebook</b><span>(লিংক যুক্ত হবে)</span></div>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M20 4L4 20"/></svg>
-      <div class="label"><b>X (Twitter)</b><span>(লিংক যুক্ত হবে)</span></div>
-    </div>
-    <div class="contact-item">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-      <div class="label"><b>Email</b><span>(লিংক যুক্ত হবে)</span></div>
-    </div>
-    </div>
-  </div>
-</footer>
-
 <div class="copy-toast ui" id="copyToast">কপি হয়েছে ✓</div>
 
 <script>
@@ -468,6 +455,7 @@ function selectWriting(id) {
   currentId = id;
   document.querySelectorAll('.title-card').forEach(el => el.classList.toggle('active', el.dataset.id === id));
   document.getElementById('navAbout').classList.remove('active');
+  document.getElementById('navContact').classList.remove('active');
   document.getElementById('navHome').classList.add('active');
   document.getElementById('mainLayout').classList.remove('no-sidebar');
   const pane = document.getElementById('contentPane');
@@ -480,6 +468,7 @@ function renderAbout() {
   currentId = null;
   document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
   document.getElementById('navHome').classList.remove('active');
+  document.getElementById('navContact').classList.remove('active');
   document.getElementById('navAbout').classList.add('active');
   document.getElementById('mainLayout').classList.add('no-sidebar');
   const pane = document.getElementById('contentPane');
@@ -493,6 +482,42 @@ function renderAbout() {
         <p>তাই এই জায়গাটা বানানো — "অনুরণন"। যাতে এই লেখাগুলো টিকে থাকে, ঠিক যেমন থাকে কোনো প্রিয় জিনিস যত্ন করে রেখে দিলে।</p>
         <p>এখানে যা লিখি, তার সবটাই ঠিক গল্প না, ঠিক দিনলিপিও না — মাঝামাঝি কিছু একটা। কিছু স্মৃতি, কিছু ভাবনা, কিছু না-বলা কথা যা লিখে ফেললে হালকা লাগে।</p>
         <p>আপনি যদি এই লেখাগুলোর মধ্যে নিজের কোনো অনুভূতির প্রতিধ্বনি খুঁজে পান, তাহলেই এই জায়গাটা সার্থক।</p>
+      </div>
+    `;
+    pane.classList.remove('switching');
+  }, 180);
+}
+
+function renderContact() {
+  playClick();
+  currentId = null;
+  document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
+  document.getElementById('navHome').classList.remove('active');
+  document.getElementById('navAbout').classList.remove('active');
+  document.getElementById('navContact').classList.add('active');
+  document.getElementById('mainLayout').classList.add('no-sidebar');
+  const pane = document.getElementById('contentPane');
+  pane.classList.add('switching');
+  setTimeout(() => {
+    pane.innerHTML = `
+      <h2>যোগাযোগ</h2>
+      <div class="contact-grid">
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 11.5a8.5 8.5 0 0 1-12.9 7.3L3 20l1.2-5A8.5 8.5 0 1 1 21 11.5Z"/></svg>
+          <div class="label"><b>WhatsApp</b><span>(লিংক যুক্ত হবে)</span></div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M14 9h-2c-1 0-1.5.5-1.5 1.5V12h3.3l-.4 3H10.5v6"/></svg>
+          <div class="label"><b>Facebook</b><span>(লিংক যুক্ত হবে)</span></div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4l16 16M20 4L4 20"/></svg>
+          <div class="label"><b>X (Twitter)</b><span>(লিংক যুক্ত হবে)</span></div>
+        </div>
+        <div class="contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+          <div class="label"><b>Email</b><span>(লিংক যুক্ত হবে)</span></div>
+        </div>
       </div>
     `;
     pane.classList.remove('switching');
@@ -572,6 +597,7 @@ function applyTheme(name) {
 })();
 
 document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); renderAbout(); });
+document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); renderContact(); });
 document.getElementById('navHome').addEventListener('click', e => {
   e.preventDefault();
   if (writings.length) selectWriting(writings[0].id);
