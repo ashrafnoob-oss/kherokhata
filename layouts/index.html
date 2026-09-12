@@ -218,9 +218,9 @@
     <span class="tagline">কিছু লেখা, অনেক অনুভব</span>
   </div>
   <nav class="site-nav">
-    <a href="#" class="active">হোম</a>
+    <a href="#" id="navHome" class="active">হোম</a>
     <a href="#">সব লেখা</a>
-    <a href="#">আমার সম্পর্কে</a>
+    <a href="#" id="navAbout">আমার সম্পর্কে</a>
     <a href="#contact">যোগাযোগ</a>
   </nav>
   <div class="theme-dots" id="themeDots" role="group" aria-label="থিম বাছাই">
@@ -370,9 +370,35 @@ function selectWriting(id) {
   playClick();
   currentId = id;
   document.querySelectorAll('.title-card').forEach(el => el.classList.toggle('active', el.dataset.id === id));
+  document.getElementById('navAbout').classList.remove('active');
+  document.getElementById('navHome').classList.add('active');
   const pane = document.getElementById('contentPane');
   pane.classList.add('switching');
   setTimeout(() => { renderContent(); pane.classList.remove('switching'); }, 180);
+}
+
+function renderAbout() {
+  playClick();
+  currentId = null;
+  document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
+  document.getElementById('navHome').classList.remove('active');
+  document.getElementById('navAbout').classList.add('active');
+  const pane = document.getElementById('contentPane');
+  pane.classList.add('switching');
+  setTimeout(() => {
+    pane.innerHTML = `
+      <div class="breadcrumb"><b>আমার সম্পর্কে</b></div>
+      <h2>আমার সম্পর্কে......</h2>
+      <div class="writing-body">
+        <p>আমি এখানে লিখি, কারণ কিছু কথা মুখে বলা যায় না।</p>
+        <p>মনের ভেতর জমে থাকা কিছু কথা, কিছু স্মৃতি, কিছু ভাবনা — এগুলো কোথাও রেখে দিতে ইচ্ছা হলো। শুধু মনে রাখলে হারিয়ে যায় সময়ের সাথে, তাই লিখে রাখা।</p>
+        <p>তাই এই জায়গাটা বানানো — "অনুরণন"। যাতে এই লেখাগুলো টিকে থাকে, ঠিক যেমন থাকে কোনো প্রিয় জিনিস যত্ন করে রেখে দিলে।</p>
+        <p>এখানে যা লিখি, তার সবটাই ঠিক গল্প না, ঠিক দিনলিপিও না — মাঝামাঝি কিছু একটা। কিছু স্মৃতি, কিছু ভাবনা, কিছু না-বলা কথা যা লিখে ফেললে হালকা লাগে।</p>
+        <p>আপনি যদি এই লেখাগুলোর মধ্যে নিজের কোনো অনুভূতির প্রতিধ্বনি খুঁজে পান, তাহলেই এই জায়গাটা সার্থক।</p>
+      </div>
+    `;
+    pane.classList.remove('switching');
+  }, 180);
 }
 
 function renderContent() {
@@ -446,6 +472,12 @@ function applyTheme(name) {
     btn.addEventListener('click', () => { playClick(); applyTheme(btn.dataset.themeBtn); });
   });
 })();
+
+document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); renderAbout(); });
+document.getElementById('navHome').addEventListener('click', e => {
+  e.preventDefault();
+  if (writings.length) selectWriting(writings[0].id);
+});
 
 renderSoundToggle();
 renderSidebar();
