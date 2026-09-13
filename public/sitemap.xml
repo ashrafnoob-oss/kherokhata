@@ -2,11 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/kherokhata/posts/manushchena/</loc>
+    <lastmod>2026-09-13T10:42:50+06:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/kherokhata/posts/</loc>
-    <lastmod>2026-09-12T21:16:33+06:00</lastmod>
+    <lastmod>2026-09-13T10:42:50+06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/kherokhata/</loc>
-    <lastmod>2026-09-12T21:16:33+06:00</lastmod>
+    <lastmod>2026-09-13T10:42:50+06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/kherokhata/posts/bidaijanate/</loc>
+    <lastmod>2026-09-13T10:41:59+06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/kherokhata/posts/oviman/</loc>
+    <lastmod>2026-09-13T10:41:14+06:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/kherokhata/posts/shobtajure/</loc>
+    <lastmod>2026-09-13T10:38:45+06:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/kherokhata/posts/chenamukhtaiochena/</loc>
     <lastmod>2026-09-12T21:16:33+06:00</lastmod>
