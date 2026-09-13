@@ -208,6 +208,12 @@
   .contact-wrap { margin-left: auto; display: inline-flex; flex-direction: column; align-items: flex-start; }
   footer.contact h3 { font-family: 'Hind Siliguri', sans-serif; color: var(--accent); font-size: 18px; margin: 0 0 14px; }
   .contact-grid { display: flex; gap: 10px; flex-wrap: wrap; }
+  .all-writings-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+  .all-writings-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 16px 18px; cursor: pointer; transition: transform .14s ease, box-shadow .14s ease; }
+  .all-writings-card:hover { transform: translateY(-2px); box-shadow: 0 4px 10px var(--shadow-4); }
+  .all-writings-card h4 { font-family: 'Noto Serif Bengali', serif; font-size: 17px; font-weight: 600; color: var(--text); margin: 0 0 6px; }
+  .all-writings-card .aw-date { font-family: 'Hind Siliguri', sans-serif; font-size: 12px; color: var(--text-muted); margin: 0 0 10px; }
+  .all-writings-card .aw-tagline { font-family: 'Noto Serif Bengali', serif; font-style: italic; font-size: 13px; color: var(--accent-dark); margin: 0; }
   .contact-item { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px dashed var(--border); border-radius: 7px; padding: 7px 10px; font-family: 'Hind Siliguri', sans-serif; color: var(--text-muted); }
   .contact-item svg { width: 15px; height: 15px; }
   .contact-item .label { display: flex; flex-direction: column; line-height: 1.3; }
@@ -216,24 +222,39 @@
 
   #writingsData { display: none; }
 
+  .nav-toggle { display: none; }
   @media (max-width: 820px) {
     .layout { grid-template-columns: 1fr; padding: 24px 18px 40px; }
     .title-list { flex-direction: row; overflow-x: auto; padding-bottom: 6px; gap: 8px; }
     .title-card { flex: 0 0 auto; white-space: nowrap; }
     .content-pane h2 { font-size: 30px; }
-    nav.site-nav { display: none; }
+    nav.site-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; flex-direction: column; align-items: flex-start; gap: 0; background: var(--surface); border-bottom: 1px solid var(--border); padding: 8px 18px; z-index: 20; }
+    nav.site-nav.open { display: flex; }
+    nav.site-nav a { padding: 10px 0; width: 100%; }
+    .nav-toggle { display: flex; align-items: center; justify-content: center; width: 38px; height: 38px; background: var(--surface); border: 1px solid var(--border); border-radius: 8px; cursor: pointer; color: var(--text); order: -1; }
+    .nav-toggle svg { width: 18px; height: 18px; }
+    .site-header { position: relative; }
+    .all-writings-grid { grid-template-columns: 1fr; gap: 8px; }
+    .all-writings-card { padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .all-writings-card h4 { font-size: 15px; margin: 0; }
+    .all-writings-card .aw-date { margin: 0; white-space: nowrap; }
+    .all-writings-card .aw-tagline { display: none; }
   }
 </style>
 </head>
 <body>
 
 <header class="site-header">
+  <button class="nav-toggle ui" id="navToggle" aria-label="মেনু খুলুন">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
   <div class="brand">
     <h1>অনুরণন</h1>
     <span class="tagline">কিছু লেখা, অনেক অনুভব</span>
   </div>
   <nav class="site-nav">
     <a href="#" id="navHome" class="active">হোম</a>
+    <a href="#" id="navAll">সব লেখা</a>
     <a href="#" id="navAbout">আমার সম্পর্কে</a>
     <a href="#" id="navContact">যোগাযোগ</a>
   </nav>
@@ -456,6 +477,7 @@ function selectWriting(id) {
   document.querySelectorAll('.title-card').forEach(el => el.classList.toggle('active', el.dataset.id === id));
   document.getElementById('navAbout').classList.remove('active');
   document.getElementById('navContact').classList.remove('active');
+  document.getElementById('navAll').classList.remove('active');
   document.getElementById('navHome').classList.add('active');
   document.getElementById('mainLayout').classList.remove('no-sidebar');
   const pane = document.getElementById('contentPane');
@@ -469,6 +491,7 @@ function renderAbout() {
   document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
   document.getElementById('navHome').classList.remove('active');
   document.getElementById('navContact').classList.remove('active');
+  document.getElementById('navAll').classList.remove('active');
   document.getElementById('navAbout').classList.add('active');
   document.getElementById('mainLayout').classList.add('no-sidebar');
   const pane = document.getElementById('contentPane');
@@ -494,6 +517,7 @@ function renderContact() {
   document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
   document.getElementById('navHome').classList.remove('active');
   document.getElementById('navAbout').classList.remove('active');
+  document.getElementById('navAll').classList.remove('active');
   document.getElementById('navContact').classList.add('active');
   document.getElementById('mainLayout').classList.add('no-sidebar');
   const pane = document.getElementById('contentPane');
@@ -520,6 +544,39 @@ function renderContact() {
         </div>
       </div>
     `;
+    pane.classList.remove('switching');
+  }, 180);
+}
+
+function renderAllWritings() {
+  playClick();
+  currentId = null;
+  document.querySelectorAll('.title-card').forEach(el => el.classList.remove('active'));
+  document.getElementById('navHome').classList.remove('active');
+  document.getElementById('navAbout').classList.remove('active');
+  document.getElementById('navContact').classList.remove('active');
+  document.getElementById('navAll').classList.add('active');
+  document.getElementById('mainLayout').classList.add('no-sidebar');
+  const pane = document.getElementById('contentPane');
+  pane.classList.add('switching');
+  setTimeout(() => {
+    const cards = writings.map(w => `
+      <div class="all-writings-card" data-id="${w.id}">
+        <h4>${w.title}</h4>
+        <p class="aw-date">${w.date}</p>
+        <p class="aw-tagline">"${w.tagline}"</p>
+      </div>
+    `).join('');
+    pane.innerHTML = `
+      <h2>সব লেখা</h2>
+      <div class="all-writings-grid">${cards}</div>
+    `;
+    document.querySelectorAll('.all-writings-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.getElementById('mainLayout').classList.remove('no-sidebar');
+        selectWriting(card.dataset.id);
+      });
+    });
     pane.classList.remove('switching');
   }, 180);
 }
@@ -596,11 +653,21 @@ function applyTheme(name) {
   });
 })();
 
-document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); renderAbout(); });
-document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); renderContact(); });
+document.getElementById('navAbout').addEventListener('click', e => { e.preventDefault(); renderAbout(); closeMobileNav(); });
+document.getElementById('navContact').addEventListener('click', e => { e.preventDefault(); renderContact(); closeMobileNav(); });
+document.getElementById('navAll').addEventListener('click', e => { e.preventDefault(); renderAllWritings(); closeMobileNav(); });
 document.getElementById('navHome').addEventListener('click', e => {
   e.preventDefault();
   if (writings.length) selectWriting(writings[0].id);
+  closeMobileNav();
+});
+
+function closeMobileNav() {
+  document.querySelector('nav.site-nav').classList.remove('open');
+}
+document.getElementById('navToggle').addEventListener('click', () => {
+  playClick();
+  document.querySelector('nav.site-nav').classList.toggle('open');
 });
 
 renderSoundToggle();
