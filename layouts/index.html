@@ -187,6 +187,8 @@
   .action-btn svg { width: 17px; height: 17px; }
 
   .tagline-box { font-family: 'Noto Serif Bengali', serif; font-style: italic; font-size: 16px; color: var(--accent-dark); background: var(--accent-soft); border-left: 3px solid var(--accent-2); border-radius: 8px; padding: 14px 18px; margin-bottom: 8px; }
+  .giscus-compact { max-width: 560px; }
+  .giscus-compact iframe.giscus-frame { margin-top: -14px !important; }
 
   .all-list { display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
   .all-item {
@@ -506,8 +508,7 @@ function renderContent() {
       </button>
     </div>
     <div class="tagline-box">"${w.tagline}"</div>
-    <h3 class="ui" style="font-size:15px;color:var(--text-muted);margin:32px 0 10px;">মন্তব্য ও প্রতিক্রিয়া</h3>
-    <div id="giscus-container"></div>
+    <div id="giscus-container" class="giscus-compact"></div>
   `;
   document.getElementById('copyBtn').addEventListener('click', () => {
     const tmp = document.createElement('div');
